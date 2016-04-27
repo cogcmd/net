@@ -3,7 +3,7 @@ cog_bundle_version: 2
 name: net
 version: "0.1"
 docker:
-  image: "cog-cmd/net"
+  image: "cogcmd/net"
   tag: "0.1"
 commands:
   dig:
