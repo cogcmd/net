@@ -1,0 +1,25 @@
+---
+cog_bundle_version: 2
+name: net
+version: "0.1"
+docker:
+  image: "cog-cmd/net"
+  tag: "0.1"
+commands:
+  dig:
+    executable: "/bundle/dig.sh"
+    documentation: "dig [--short] [--trace] [--server server] <target>"
+    enforcing: false
+    options:
+      short:
+        type: bool
+        required: false
+      type:
+        type: string
+        required: false
+      server:
+        type: string
+        required: false
+templates:
+  dig:
+    slack: "```{{#body}}{{{.}}}\n{{/body}}```"
