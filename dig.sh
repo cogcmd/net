@@ -23,5 +23,10 @@ if [ "$COG_OPT_SERVER" != "" ] ; then
     arguments+=("@${COG_OPT_SERVER}")
 fi
 
+# Set template to use for rendering output
 echo "COG_TEMPLATE: dig"
+
+# Run the dig command. The results will be sent back as individual
+# lines and Cog will wrap them in an array under a key named body
+# in the response object.
 dig "${arguments[@]}" "$COG_ARGV_0"
