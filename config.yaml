@@ -1,5 +1,5 @@
 ---
-cog_bundle_version: 2
+cog_bundle_version: 3
 name: net
 version: "0.1"
 docker:
@@ -9,7 +9,8 @@ commands:
   dig:
     executable: "/bundle/dig.sh"
     documentation: "dig [--short] [--trace] [--server server] <target>"
-    enforcing: false
+    rules:
+      - "when command is net:dig allow"
     options:
       short:
         type: bool
