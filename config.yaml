@@ -1,6 +1,7 @@
 ---
 cog_bundle_version: 3
 name: net
+description: "Simple network utilities"
 version: "0.1"
 docker:
   image: "cogcmd/net"
@@ -8,6 +9,7 @@ docker:
 commands:
   dig:
     executable: "/bundle/dig.sh"
+    description: "DNS lookup utility"
     documentation: "dig [--short] [--trace] [--server server] <target>"
     rules:
       - "when command is net:dig allow"
