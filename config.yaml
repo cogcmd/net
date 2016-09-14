@@ -1,28 +1,46 @@
 ---
-cog_bundle_version: 3
+cog_bundle_version: 4
 name: net
 description: "Simple network utilities"
-version: "0.1"
+author: "Operable <support@operable.io>"
+homepage: "https://github.com/cogcmd/net"
+version: "0.2"
 docker:
   image: "cogcmd/net"
-  tag: "0.1"
+  tag: "0.2"
 commands:
   dig:
     executable: "/bundle/dig.sh"
     description: "DNS lookup utility"
-    documentation: "dig [--short] [--trace] [--server server] <target>"
+    long_description: |
+      Simple wrapper for the `dig` command line utility. Only a select
+      few options are exposed in this command; it is not intended to
+      be a complete "dig in chat" tool.
+    arguments: "<target>"
     rules:
       - "when command is net:dig allow"
     options:
       short:
+        description: "Return a terse answer. Verbose reply is the default"
         type: bool
         required: false
       type:
+        description: "Valid BIND 9 query type. Defaults to 'A'"
         type: string
         required: false
       server:
+        description: "Name server to query"
         type: string
+        required: false
+      trace:
+        description: "Enable the 'trace' query option. Disabled by default"
+        type: bool
         required: false
 templates:
   dig:
-    slack: "```{{#body}}{{{.}}}\n{{/body}}```"
+    body: |
+      ~each var=$results~
+      ```~each var=$item.body as=l~
+      ~$l~
+      ~end~```
+      ~end~
