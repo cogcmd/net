@@ -4,10 +4,10 @@ name: net
 description: "Simple network utilities"
 author: "Operable <support@operable.io>"
 homepage: "https://github.com/cogcmd/net"
-version: "0.2"
+version: "0.3.0"
 docker:
   image: "cogcmd/net"
-  tag: "0.2"
+  tag: "0.3.0"
 commands:
   dig:
     executable: "/bundle/dig.sh"
@@ -36,8 +36,50 @@ commands:
         description: "Enable the 'trace' query option. Disabled by default"
         type: bool
         required: false
+  ping:
+    executable: "/bundle/ping.sh"
+    description: "PING utility"
+    long_description: |
+      Simple wrapper for the `ping` command line utility. Only a select
+      few options are exposed in this command; it is not intended to
+      be a complete "ping in chat" tool.
+    arguments: "<target>"
+    rules:
+      - "when command is net:ping allow"
+    options:
+      count:
+        description: "Number of times to ping.  Defaults to 5"
+        type: string
+        required: false
+  nslookup:
+    executable: "/bundle/nslookup.sh"
+    description: "query Internet name servers interactively"
+    long_description: |
+      Simple wrapper for the `nslookup` command line utility.
+    arguments: "<target>"
+    rules:
+      - "when command is net:nslookup allow"
+    options:
+      server:
+        description: "The server to use as source for nslookup."
+        type: string
+        required: false
 templates:
   dig:
+    body: |
+      ~each var=$results~
+      ```~each var=$item.body as=l~
+      ~$l~
+      ~end~```
+      ~end~
+  ping:
+    body: |
+      ~each var=$results~
+      ```~each var=$item.body as=l~
+      ~$l~
+      ~end~```
+      ~end~
+  nslookup:
     body: |
       ~each var=$results~
       ```~each var=$item.body as=l~
