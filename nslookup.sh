@@ -4,9 +4,8 @@ declare -a arguments
 
 if [ "$COG_ARGV_0" == "" ] ; then
     echo "Error: You must supply a hostname or IP address to nslookup "
-fi
-
-if [ "$COG_OPT_SERVER" != "" ] ; then
+    exit 1
+elif [ "$COG_OPT_SERVER" != "" ] ; then
     arguments+=("${COG_OPT_SERVER}")
 fi
 
